@@ -91,6 +91,9 @@ class AuthController extends Controller
         $user = User::where('token', $request->token)->first();
         $check = $user->otpCheck($request->code);
         if (!is_array($check) and $check) {
+            $user->update([
+                'status' => 1,
+            ]);
             return response()->json([
                 'status' => true,
             ], 200);

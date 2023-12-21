@@ -44,6 +44,24 @@ class UserSeeder extends Seeder
                 'status' => 1,
                 'theme' => 'default',
             ],
+            [
+                'name' => 'Shukrullo4',
+                'email' => 'shukrullobk4@gmail.com',
+                'phone' => '993011888',
+                'password' => Hash::make('1a72256a'),
+                'token' => Str::uuid(),
+                'status' => 1,
+                'theme' => 'default',
+            ],
+            [
+                'name' => 'Shukrullo5',
+                'email' => 'shukrullobk5@gmail.com',
+                'phone' => '993011000',
+                'password' => Hash::make('1272250a'),
+                'token' => Str::uuid(),
+                'status' => 1,
+                'theme' => 'default',
+            ],
         ];
 
         foreach ($data as $d){

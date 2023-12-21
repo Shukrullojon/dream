@@ -6,10 +6,13 @@ Route::group(['prefix' => 'auth', 'namespace' => '\App\Http\Controllers\Api'], f
     Route::post('/code', 'AuthController@code');
 });
 
-// Category
-Route::group(['prefix' => 'category', 'namespace' => '\App\Http\Controllers\Api'], function () {
-    Route::post('/get', 'CategoryController@get');
-    Route::post('/sub', 'CategoryController@sub');
+
+Route::group(['prefix' => 'module', 'namespace' => '\App\Http\Controllers\Api'], function () {
+    Route::get('/get', 'ModuleController@get');
+});
+
+Route::group(['prefix' => 'day', 'namespace' => '\App\Http\Controllers\Api'], function () {
+    Route::get('/get', 'DayController@get');
 });
 
 
