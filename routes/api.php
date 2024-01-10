@@ -25,3 +25,15 @@ Route::group(['prefix' => 'result', 'namespace' => '\App\Http\Controllers\Api'],
     Route::post('/set', 'ResultController@set');
 });
 
+Route::group(['prefix' => 'user', 'namespace' => '\App\Http\Controllers\Api'], function () {
+    Route::get('/get', 'UserController@get');
+    Route::post('/update', 'UserController@update');
+});
+
+Route::group(['prefix' => 'event', 'namespace' => '\App\Http\Controllers\Api'], function () {
+    Route::get('/get', 'EventController@get');
+    Route::post('/set', 'EventController@set');
+});
+
+
+

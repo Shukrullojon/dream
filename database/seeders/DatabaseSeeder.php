@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PointSeeder::class);
         $this->call(VocabularySeeder::class);
         $this->call(GrammerSeeder::class);
+        $this->call(EventSeeder::class);
     }
 }
