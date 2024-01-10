@@ -14,7 +14,7 @@ class ModuleController extends Controller
     public function get(Request $request)
     {
         $user = User::where('token',$request->bearerToken())->first();
-        $modules = Module::select('id','name','image')
+        $modules = Module::select('id','name')
             ->where('status',1)
             ->get()
             ->toArray();

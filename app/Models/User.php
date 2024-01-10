@@ -2,106 +2,62 @@
 
 namespace App\Models;
 
-use App\Services\OtpService;
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Services\SmsService;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
-use Spatie\Permission\Traits\HasRoles;
-use DateTimeInterface;
-
-/**
- * @property string $name
- * @property string $email
- * @property string $phone
- * @property string $password
- * @property string $token
- * @property string $status
- * @property string $theme
- */
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $fillable = [
         'name',
+        'surname',
         'email',
         'phone',
         'password',
         'token',
-        'status',
-        'theme',
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
+     * The attributes that should be hidden for serialization.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     /**
-     * The attributes that should be cast to native types.
+     * The attributes that should be cast.
      *
-     * @var array
+     * @var array<string, string>
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'password' => 'hashed',
     ];
 
-    public function setTheme(string $theme)
-    {
-        $this->theme = $theme;
-        $this->save();
-    }
-
-    public function theme():array
-    {
-        $classes = [
-            'default' => [
-                'body' => '',
-                'navbar' => ' navbar-light ',
-                'sidebar' => 'sidebar-dark-primary ',
-            ],
-            'light' => [
-                'body' => '',
-                'navbar' => ' navbar-white ',
-                'sidebar' => ' sidebar-light-lightblue '
-            ],
-            'dark' => [
-                'body' => ' dark-mode ',
-                'navbar' => ' navbar-dark ',
-                'sidebar' => ' sidebar-dark-secondary '
-            ]
-        ];
-        return $classes[$this->theme] ?? [
-                'body' => '',
-                'navbar' => ' navbar-light ',
-                'sidebar' => ' sidebar-dark-primary ',
-            ];
-    }
-
-    /**
-     * Prepare a date for array / JSON serialization.
-     *
-     * @param  \DateTimeInterface  $date
-     * @return string
-     */
-    protected function serializeDate(DateTimeInterface $date)
-    {
-        return $date->format('Y-m-d H:i:s');
+    public function today(){
+        return $this->hasOne(Point::class)
+            ->where('model', Day::class)
+            ->where('point',1)
+            ->latest();
     }
 
     public function otpSend(){
-        $rand = rand(10000,99999);
+        //$rand = rand(10000,99999);
+        $rand = 12345;
         $otp = Otp::create([
             'model' => User::class,
             'model_id' => $this->id,
@@ -113,6 +69,7 @@ class User extends Authenticatable
         ]);
         $message = "Parolni hech kimga bermang. Sizning parol: {$rand}";
         $service = SmsService::login();
+        if (!isset($service["data"]["token"])) return false;
         $token = $service["data"]["token"];
         $send = SmsService::send([
             'token' => $token,

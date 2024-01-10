@@ -25,7 +25,7 @@
             </a>
         </li>
 
-        <li class="nav-item">
+        {{--<li class="nav-item">
             <a href="{{ route('grammerIndex') }}" class="nav-link {{ Request::is('grammer*') ? "active":'' }}">
                 <i class="fas fa-calendar-day"></i>
                 <p>Grammer</p>
@@ -79,7 +79,7 @@
                 <i class="fas fa-calendar-day"></i>
                 <p>Info</p>
             </a>
-        </li>
+        </li>--}}
 
         <li class="nav-item has-treeview">
             <a href="#"

@@ -12,6 +12,4 @@ class Point extends Model
     protected $table = 'points';
 
     protected $guarded = [];
-
-
 }

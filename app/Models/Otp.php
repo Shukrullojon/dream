@@ -9,8 +9,7 @@ class Otp extends Model
 {
     use HasFactory;
 
-    protected $table = 'otp';
+    protected $table = 'otps';
 
     protected $guarded = [];
-
 }
