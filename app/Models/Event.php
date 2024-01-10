@@ -16,4 +16,9 @@ class Event extends Model
     public function cnt(){
         return $this->hasOne(EventUser::class,'id','event_id');
     }
+
+    public function media(){
+        return $this->hasMany(Media::class,'model_id','id')
+            ->where('model',Event::class);
+    }
 }

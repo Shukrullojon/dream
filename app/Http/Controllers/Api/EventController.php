@@ -12,6 +12,7 @@ class EventController extends Controller
 {
     public function get(){
         $events = Event::select('id','title','info','date','status')
+            ->with('media')
             ->with('cnt')
             ->where('status',1)
             ->where('date','>',date("Y-m-d H:i:s"))
