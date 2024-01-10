@@ -28,7 +28,6 @@ class TodayController extends Controller
             ->where('user_id',$user->id)
             ->first();
 
-
         $grammers = Grammer::with('media')->where('day_id',$user->today->model_id)->first();
         $ball_gra = Ball::select('id','scores','coins')
             ->where('model',Day::class)

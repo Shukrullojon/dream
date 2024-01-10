@@ -31,14 +31,14 @@ class VocabularySeeder extends Seeder
             Media::create([
                 'model' => Vocabulary::class,
                 'model_id' => $voc->id,
-                'data' => 'image',
+                'data' => 'image.jpeg',
                 'type' => 1,
                 'status' => 1,
             ]);
             Media::create([
                 'model' => Vocabulary::class,
                 'model_id' => $voc->id,
-                'data' => 'audio',
+                'data' => 'audio.mp3',
                 'type' => 2,
                 'status' => 1,
             ]);

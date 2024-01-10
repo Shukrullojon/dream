@@ -34,7 +34,7 @@ class GrammerSeeder extends Seeder
             Media::create([
                 'model' => Grammer::class,
                 'model_id' => $grammer->id,
-                'data' => 'video',
+                'data' => 'video.mp4',
                 'type' => 3,
                 'status' => 1,
             ]);
