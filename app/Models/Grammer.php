@@ -12,4 +12,9 @@ class Grammer extends Model
     protected $table = 'grammers';
 
     protected $guarded = [];
+
+    public function media(){
+        return $this->hasMany(Media::class,'model_id','id')
+            ->where('model',Grammer::class);
+    }
 }

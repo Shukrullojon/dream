@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 class TodayController extends Controller
 {
     public function get(Request $request){
-        $user = User::where('token',$request->token)->first();
+        $user = User::where('token',$request->bearerToken())->first();
         $vocabularies = Vocabulary::with('media')->where('day_id',$user->today->model_id)->get();
         $ball_voc = Ball::select('id','scores','coins')
             ->where('model',Day::class)
@@ -27,6 +27,7 @@ class TodayController extends Controller
             ->where('table',Vocabulary::class)
             ->where('user_id',$user->id)
             ->first();
+
 
         $grammers = Grammer::with('media')->where('day_id',$user->today->model_id)->first();
         $ball_gra = Ball::select('id','scores','coins')

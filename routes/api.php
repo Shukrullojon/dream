@@ -20,3 +20,8 @@ Route::group(['prefix' => 'day', 'namespace' => '\App\Http\Controllers\Api'], fu
 Route::group(['prefix' => 'today', 'namespace' => '\App\Http\Controllers\Api'], function () {
     Route::get('/get', 'TodayController@get');
 });
+
+Route::group(['prefix' => 'result', 'namespace' => '\App\Http\Controllers\Api'], function () {
+    Route::post('/set', 'ResultController@set');
+});
+
