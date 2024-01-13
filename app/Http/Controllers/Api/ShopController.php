@@ -33,7 +33,7 @@ class ShopController extends Controller
     }
 
     public function product(Request $request){
-        $product = Product::with('media')->find($request->id);
+        $product = Product::with('media')->where('id',$request->id)->first();
         return response()->json([
             'status' => true,
             'result' => [
