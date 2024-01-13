@@ -10,6 +10,7 @@ use App\Models\Result;
 use App\Models\User;
 use App\Models\Vocabulary;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ResultController extends Controller
 {
@@ -43,4 +44,20 @@ class ResultController extends Controller
             'status' => true,
         ], 200);
     }
+
+    public function get(Request $request){
+        $user = User::where('token',$request->bearerToken())->first();
+        $result = Result::select(DB::raw('sum(scores) as scores'), DB::raw('sum(coins) as coins'))
+            ->where('user_id',$user->id)
+            ->where('is_done',1)
+            ->groupBy('user_id')
+            ->first();
+        return response()->json([
+            'status' => true,
+            'result' => [
+                'result' => $result,
+            ],
+        ], 200);
+    }
+
 }

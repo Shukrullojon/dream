@@ -23,6 +23,7 @@ Route::group(['prefix' => 'today', 'namespace' => '\App\Http\Controllers\Api'], 
 
 Route::group(['prefix' => 'result', 'namespace' => '\App\Http\Controllers\Api'], function () {
     Route::post('/set', 'ResultController@set');
+    Route::get('/get', 'ResultController@get');
 });
 
 Route::group(['prefix' => 'user', 'namespace' => '\App\Http\Controllers\Api'], function () {
@@ -33,6 +34,12 @@ Route::group(['prefix' => 'user', 'namespace' => '\App\Http\Controllers\Api'], f
 Route::group(['prefix' => 'event', 'namespace' => '\App\Http\Controllers\Api'], function () {
     Route::get('/get', 'EventController@get');
     Route::post('/set', 'EventController@set');
+});
+
+Route::group(['prefix' => 'shop', 'namespace' => '\App\Http\Controllers\Api'], function () {
+    Route::get('/get', 'ShopController@get');
+    Route::get('/category', 'ShopController@category');
+    Route::get('/product', 'ShopController@product');
 });
 
 

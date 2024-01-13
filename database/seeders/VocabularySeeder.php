@@ -21,7 +21,7 @@ class VocabularySeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 0; $i < 5000; $i++) {
+        for ($i = 0; $i < 500; $i++) {
             $voc = Vocabulary::create([
                 'name' => Str::random(15),
                 'description' => Str::random(150),
