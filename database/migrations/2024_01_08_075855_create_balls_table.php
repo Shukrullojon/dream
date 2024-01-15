@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('balls', function (Blueprint $table) {
             $table->id();
-            $table->string('model');
-            $table->string('table');
+            $table->string('model'); // model bu yerda day larni kiritish uchun
             $table->unsignedBigInteger('model_id');
+            $table->string('table');
+            $table->string('table_id')->nullable(); // table bu yerda grammer, vocabulary bo'lishi mumkun
             $table->tinyInteger('scores')->default(0);
             $table->tinyInteger('coins')->default(0);
             $table->timestamps();
